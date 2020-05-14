@@ -1,5 +1,6 @@
-# Git pull requests
-# Checklist
+## Git pull requests: 
+https://github.com/vijayetar/madlib-cli/pull/1
+## Checklist
   - [x] Feature Tasks Present
       [x] store the words in another list
       [x] make these words into a dictionary
@@ -11,7 +12,7 @@
      - [ ] “Happy Path” - Expected outcome
      - [ ] Expected failure
      - [ ] Edge Case (if applicable/obvious)
-  - [ ] README for this challenge is complete
-       [ ] Pull request submitted
+  - [x] README for this challenge is complete
+       [x] Pull request submitted
 
        
