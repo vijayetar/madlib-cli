@@ -14,15 +14,13 @@ def welcome():
   print("*"*50)
   print("\n")
 
+def read_template(path):
+  with open(path) as file:
+    template = file.read()
+    template = template.strip()
+    return template
 
-with open('assets/template.txt') as file:
-  template = file.read()
-  template = template.strip()
-  print('this is template',template)
-
-print('file is closed?', file.closed)
-
-def get_question():
+def get_question(template):
   count = template.count("{")
   end = 0
   new_list=[]
@@ -58,23 +56,19 @@ def create_string(template, dic):
     # replace word in template to that in dic
     for x,y in dic.items():
       if y in word:
-        if y in word:
-          new_template = new_template.replace(word,x)
-  print('this is new template',new_template)
+        new_template = new_template.replace(word,x,1)
+  return new_template
 
-
-# remove the words within the "{}" and leave it empty
-#[x] store the words in another list
-#[x] make these words into a dictionary
-#[x] let user input a value for each key in the dictionary 
-#[x]insert the value in the template
-#[x]return the new string
-#[x]save the new string in the file
+def write_file(path, template):
+  with open(path, 'w') as writer:
+    writer.write(template)
 
 if __name__ == "__main__":
-    welcome()
-    new_list = get_question()
-    user_dict = get_user_input(new_list)
-    create_string(template, user_dict)
+  template = read_template('assets/template.txt')
+  welcome()
+  new_list = get_question(template)
+  user_dict = get_user_input(new_list)
+  new_template = create_string(template, user_dict)
+  write_file('assets/new_template.txt',new_template)
 
 
