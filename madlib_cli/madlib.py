@@ -24,50 +24,57 @@ print('file is closed?', file.closed)
 
 def get_question():
   count = template.count("{")
-  print('This is the count', count)
   end = 0
   new_list=[]
   for i in range(count):
-    print('this is i', i)
-    print('This is inside the loop')
     start = template.find("{",end)+1
     end = template.find("}",start)
-    print(start,end)
     word = template[start:end]
-    print('this is word', word)
     new_list.append(word)
-    print('this is new_list', new_list)
-    print('this is new word in template', template)
-  get_user_input(new_list)
+  return(new_list)
 
 def prompt_user(word):
-  print('*** Please enter your choice of {}? ***'.format(word))
+  print('*** Please enter one {}? ***'.format(word))
 
 def get_user_input(list):
   for question in list:
     prompt_user(question)
-    user_input = input()
-    print(user_input)
-    answer = "".join([j for j in input().split()])
-    if answer in answer_dict:
-      print("try something new")
-      prompt_user(question)
-      answer = "".join([j for j in input().split()])
-    answer_dict[answer]=question
-  print(answer_dict)
+    user_input = "".join([j for j in input().split()])
+    while user_input=="" or user_input in answer_dict:
+      print("try again")
+      user_input = "".join([j for j in input().split()])
+    answer_dict[user_input]=question
+  return answer_dict
 
-
+def create_string(template, dic):
+  count = template.count("{")
+  print('This is the count', count)
+  end = 0
+  new_template = template
+  for i in (range(count)):
+    start = template.find("{",end)
+    end = template.find("}",start)+1
+    word = template[start:end]
+    # replace word in template to that in dic
+    for x,y in dic.items():
+      if y in word:
+        if y in word:
+          new_template = new_template.replace(word,x)
+  print('this is new template',new_template)
 
 
 # remove the words within the "{}" and leave it empty
 #[x] store the words in another list
-# make these words into a dictionary
-# let user input a value for each key in the dictionary 
-# insert the value in the template
-# return the new string
-# save the new string in the file
+#[x] make these words into a dictionary
+#[x] let user input a value for each key in the dictionary 
+#[x]insert the value in the template
+#[x]return the new string
+#[x]save the new string in the file
 
 if __name__ == "__main__":
     welcome()
-    get_question()
+    new_list = get_question()
+    user_dict = get_user_input(new_list)
+    create_string(template, user_dict)
+
 
