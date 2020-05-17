@@ -32,11 +32,11 @@ def get_question(template):
   return(new_list)
 
 def prompt_user(word):
-  print('*** Please enter one {}? ***'.format(word))
+  return f'*** Please enter one {word}? ***'
 
 def get_user_input(list):
   for question in list:
-    prompt_user(question)
+    print(prompt_user(question))
     user_input = "".join([j for j in input().split()])
     while user_input=="" or user_input in answer_dict:
       print("try again")
@@ -46,7 +46,6 @@ def get_user_input(list):
 
 def create_string(template, dic):
   count = template.count("{")
-  print('This is the count', count)
   end = 0
   new_template = template
   for i in (range(count)):
@@ -57,6 +56,7 @@ def create_string(template, dic):
     for x,y in dic.items():
       if y in word:
         new_template = new_template.replace(word,x,1)
+  print(new_template)
   return new_template
 
 def write_file(path, template):
@@ -64,7 +64,7 @@ def write_file(path, template):
     writer.write(template)
 
 if __name__ == "__main__":
-  template = read_template('assets/template.txt')
+  template = read_template('assets/spam.txt')
   welcome()
   new_list = get_question(template)
   user_dict = get_user_input(new_list)
